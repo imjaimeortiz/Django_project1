@@ -54,4 +54,22 @@ Como en urls.py le hemos dado un nombre a las rutas, podemos cambiar la ruta abs
 La única aplicación del proyecto es polls, por lo que definimos app_name como polls
 
 
-10- Use generic views: Less code is better
+10- Vistas genéricas
+Hemos cambiado en urls.py de question_id a pk y en vez de que el nombre de la vista sea views.vista va a ser views.funcion.as_view(). EStas funciones son las que se definen en views.
+
+En este caso introducimos dos vistas genéricas: ListVIew (muestra una lista de objetos) y DetailView (muestra una página detallada para un objeto en particular).
+Para cada vista, es necesario indicar el objeto que muestra, atributo model y el nombre de la template en template_name.
+También hay que indicar el context_object_type, que en el caso de una clase si no se indica nada, Django le asigna el nombre de la clase al atributo. Por ejemplo, la clase Question de la DetailView
+
+
+11- Testing automático (Automated testing)
+Antes para testing hemos estado usando el shell.
+Hay muchas estrategias -> Test-driven development : Crear los tests antes que el código.
+
+Crear tests:
+1) Identificar bug
+2) Escribir test en tests.py
+3) Probar el test: python manage.py test polls
+4) Arreglar
+
+Testing de una vista
