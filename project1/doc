@@ -1,0 +1,57 @@
+1- Crear proyecto
+$ django-admin startproject mysite
+El proyecto se crea en un directorio /proyecto, que dentro tiene manage.py y otro subdirectorio /proyecto, que es en sí el proyecto.
+Este subdirectorio tiene __init__.py, settings.py, urls.py (es como una tabla de contenidos), asgi.py y wsgi.py que son el punto de entrada para servidores ASGI y WSGI.
+
+
+2- Crear la aplicación de Polls.
+$ python manage.py startapp polls
+Se crea un directorio polls.
+
+
+
+3- Crear vistas.
+Se crean en polls/views.py. Hay que importar HttpResponse.
+
+
+
+4- Configuración de las distintas aplicaciones.
+Para ello crear en polls, el fichero urls.py y en proyecto/urls.py incluir polls.url
+
+
+5- Configurar DB
+Por defecto, Django usa SQLite, pero se puede cambiar cambiando la directiva DABASES 'default' y más configuraciones (https://docs.djangoproject.com/en/3.2/intro/tutorial02/) de settings.py
+
+
+6- Crear modelos
+Crear las clases
+Para activarlas, hay que ir a la directiva INSTALLED_APPS de settings.py. Aquí hay que incluir las clases que se hayan definido en los polls. Por lo que hay que incluir 'polls.apps.PollsConfig'
+Después ejecutar python manage.py makemigrations polls y se verá que se han creado los modelos de las clases que se hayan definido. Con este comando es como Django guarda los cambios que se hagan en los modelos. Para aplicarlos a la DB, hay que usar python manage.py migrate
+
+
+7- Administrador de Django
+He puesto: admin/admin
+EN polls/admin se puede actualizar para que se creen los modelos: admin.site.register(Question), con esto cuando entramos en el navegador a /admin y ponemos la contraseña, se muestran las preguntas...
+
+
+8- Otras vistas
+En Django las vistas son funciones en Python. Django elige las vistas examinando la URL después del dominio
+
+Podemos añadir más vistas. En este caso se han añadido detail, results y vote.
+
+Después hemos cambiado el index para que haga algo de verdad, en este caso, devuelve las 5 Question más recientes.
+
+Cuando queremos mostrar algo, se hace sobre una template. Para ello hay que crear el directorio templates, donde se alojarán. Dentro hay que crear otro directorio: polls en el que estarán los ficheros .html. Esto es así por la forma en la que Django carga las plantillas.
+
+Ahora hemos cambiado también la vista detail para el caso en el que la Question no existiera, con la función get_object_or_404(). Ahora es también necesario completar la template detail.html
+
+
+9- Quitar las referencias explícitas de archivos
+Como en urls.py le hemos dado un nombre a las rutas, podemos cambiar la ruta absoluta a este nombre
+
+
+10- Namespacing
+La única aplicación del proyecto es polls, por lo que definimos app_name como polls
+
+
+10- Use generic views: Less code is better
