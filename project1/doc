@@ -72,4 +72,43 @@ Crear tests:
 3) Probar el test: python manage.py test polls
 4) Arreglar
 
-Testing de una vista
+12- Mejorar una vista
+En este caso, antes se mostraban las polls aunque no hubieran sido publicadas (que tenían pub_date en el futuro). Para arreglar esto, arreglamos el return de la función get_queryset
+
+En el tutorial se mejoran las vistas del índice y de los detalles, se dan ideas de cómo se podría mejorar la de resultados.
+Al final lo probaremos, ya que más tests es mejor.
+Se recomienda que haya:
+	- Una clase test por cada vista
+	- Un método para cada condición que se quiere probar
+	- Que los nombres de los métodos sean descriptivos de la funcionalidad
+	
+	
+13- Ahora añadiremos más cosas de cara al navegador: imágenes, stylesheets... En Django a esto se le llama "static files"
+En proyectos pequeños, no es un problema almacenar estos ficheros en ubicaciones a las que se acceda, pero en proyectos grandes es más complicado y se emplea django.contrib.staticfiles 
+
+Creamos un directorio static en polls. Si miramos el fichero de settings.py de project1, veremos que por defecto los ficheros estáticos se encuentran en /static/.
+
+Como la hoja de estilos se buscará en polls/style.css, dentro de static creamos esto.
+****PARECE QUE EN EL TUTORIAL NO MENCIONA ALGO, PORQUE NO ENCEUNTRA EL STYLE.CSS*****
+
+
+14- Formulario de entrada del admin
+Para cambiar el formulario de entrada, a admin.site.register hay que pasarle como segundo parámetro una clase administrador.
+
+***cambios siguiendo el tutorial***
+
+en el atributo inlines, si se especifica la clase, se hará que esa clase estará dentro de la otra. Por ejemplo, en este caso, el formulario de las preguntas
+
+con list_diaplay se muestran en lista los atributos que queremos mostrar de la clase
+
+con list_filter se muestra un filtro del atributo que se pase
+
+con search_fields se añade un fitreo de bśuqueda del atributo que se pase
+
+
+15- Customizar las templates
+EN settings, en TEMPLATES, DIRS, añadir [BASE_DIR / 'templates']
+crear en polls/templates el directorio admin y copiar ahí el fichero base_site.html que está en /home/imjaimeortiz/.local/lib/python3.9/site-packages/django/contrib/admin/templates/admin/base_site.html 
+
+
+16- Reusabilidad
